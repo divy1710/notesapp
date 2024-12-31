@@ -26,4 +26,12 @@ app.get('/files/:filename',function(req,res){
         res.render('show',{filename:req.params.filename,filedata:filedata});
     })
 })
+app.get('/edit/:filename',function(req,res){
+    res.render('edit',{filename:req.params.filename});
+})
+app.post('/edit',function(req,res){
+    fs.rename(`./files/${req.body.previous}`,`./files/${req.body.new}`,function(err){
+        res.redirect('/'); 
+    })
+})
 app.listen(8000);
